@@ -1,0 +1,78 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+
+PTH  = $(abspath $(dir $(MAKEFILE_LIST)))
+VER ?= $(shell dpkg-parsechangelog --file $(PTH)/changelog \
+         --show-field version \
+         | sed -e "s,\(.*\)-.*,\\1," -e "s,.*:,," -e "s,.dfsg[0-9]*,,")
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -f *.pyc */*.pyc */*/*.pyc
+	rm -f CONTRIBUTING.html
+	rm -f esptool espefuse espsecure
+	rm -f esptool.1 espefuse.1 espsecure.1
+
+override_dh_auto_build:
+	ln -s esptool.py esptool
+	ln -s espsecure.py espsecure
+	ln -s espefuse.py espefuse
+	markdown CONTRIBUTING.md > CONTRIBUTING.html
+	help2man --no-info --section 1 --include=debian/see-also \
+	  --source="Esptool.py $(VER)" \
+	  -n "ESP8266 and ESP32 ROM Bootloader Utility" \
+	  --version-string="$(VER)" \
+	  ./esptool \
+	  | sed -e "s,esptool.py,esptool," \
+	  -e "s,Esptool.py,esptool.py," \
+	  -e "s,esptool v[0-9]\+.*,," \
+	  -e "s,\[.*\],," \
+	  -e "s,sage: esptool,sage: esptool [OPTION] COMMAND," \
+	  -e "s,positional arguments,command arguments," \
+	  -e "s,\.\.\.,," \
+	  -e "s,{load.*version},," \
+	  -e "s/\\\fR {.*},/,/" \
+	  > esptool.1
+	help2man --no-info --section 1 --include=debian/see-also \
+	  --source="Esptool.py $(VER)" \
+	  -n "ESP32 Secure Boot & Flash Encryption tool" \
+	  --version-string="$(VER)" \
+	  ./espsecure \
+	  | sed -e "s,espsecure.py,espsecure," \
+	  -e "s,Esptool.py,esptool.py," \
+	  -e "s,espsecure v[0-9]\+.*,," \
+	  -e "s,\[.*\],," \
+	  -e "s,sage: espsecure,sage: espsecure [OPTION] COMMAND," \
+	  -e "s,positional arguments,command arguments," \
+	  -e "s,\.\.\.,," \
+	  -e "s,{digest.*data},," \
+	  > espsecure.1
+	help2man --no-info --section 1 --include=debian/see-also \
+	  --source="Esptool.py $(VER)" \
+	  -n "ESP32 efuse get/set tool" \
+	  --version-string="$(VER)" \
+	  ./espefuse \
+	  | sed -e "s,espefuse.py,espefuse," \
+	  -e "s,Esptool.py,esptool.py," \
+	  -e "s,espefuse v[0-9]\+.*,," \
+	  -e "s,\[.*\],," \
+	  -e "s,sage: espefuse,sage: espefuse [OPTION] COMMAND," \
+	  -e "s,positional arguments,command arguments," \
+	  -e "s,\.\.\.,," \
+	  -e "s,{dump.*_mac},," \
+	  > espefuse.1
+
+override_dh_auto_install:
+	:
+
+get-orig-source:
+	uscan --no-conf \
+	  --destdir=$(CURDIR) \
+	  --rename \
+	  --force-download \
+	  --download-version $(VER) \
+	  --check-dirname-level=0 \
+	  $(PTH)

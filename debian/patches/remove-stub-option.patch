@@ -1,0 +1,13 @@
+diff --git a/esptool.py b/esptool.py
+index 7b107ab..3e9b0dd 100755
+--- a/esptool.py
++++ b/esptool.py
+@@ -4651,6 +4651,8 @@ def main(argv=None, esp=None):
+     args = parser.parse_args(argv)
+     print('esptool.py v%s' % __version__)
+ 
++    args.no_stub = True
++
+     # operation function can take 1 arg (args), 2 args (esp, arg)
+     # or be a member function of the ESPLoader class.
+ 

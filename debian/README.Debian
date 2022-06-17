@@ -1,0 +1,10 @@
+esptool for Debian
+------------------
+
+The binary stub code has been purged out of esptool.py file by debian/uupdate
+script due to DFSG as that code statically links to Espressif SDK libraries
+which are under license limitation of using with Espressif systems only
+and/or are distributed with no source code.
+
+ -- Milan Kupcevic <milan@debian.org>  Sun, 22 Oct 2017 21:15:00 -0400
+

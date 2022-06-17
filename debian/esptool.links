@@ -1,0 +1,3 @@
+/usr/share/esptool/esptool.py   /usr/bin/esptool
+/usr/share/esptool/espsecure.py /usr/bin/espsecure
+/usr/share/esptool/espefuse.py  /usr/bin/espefuse

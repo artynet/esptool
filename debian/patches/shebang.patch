@@ -1,0 +1,30 @@
+diff --git a/espefuse.py b/espefuse.py
+index 73faae3..5b8cc7c 100755
+--- a/espefuse.py
++++ b/espefuse.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # SPDX-FileCopyrightText: 2016-2022 Espressif Systems (Shanghai) CO LTD
+ #
+diff --git a/espsecure.py b/espsecure.py
+index b7bb681..cd9c84a 100755
+--- a/espsecure.py
++++ b/espsecure.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # SPDX-FileCopyrightText: 2016-2022 Espressif Systems (Shanghai) CO LTD
+ #
+diff --git a/esptool.py b/esptool.py
+index 7b107ab..652d8c4 100755
+--- a/esptool.py
++++ b/esptool.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ # SPDX-FileCopyrightText: 2014-2022 Fredrik Ahlberg, Angus Gratton, Espressif Systems (Shanghai) CO LTD, other contributors as noted.
+ #
