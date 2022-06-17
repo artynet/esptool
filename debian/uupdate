@@ -1,0 +1,71 @@
+#!/bin/sh
+#
+# Copyright (C) 2017 Milan Kupcevic <milan@debian.org>
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
+# Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+set -e
+
+while [ "$1" ]; do
+  case "$1" in
+    --upstream-version|-v)
+      shift; new_version="$1"
+      ;;
+    --force-bad-version|-b|--find|-f)
+      :
+      ;;
+    *)
+      if [ -f "$1" ]; then
+        new_tarball="$1"
+      fi
+      ;;
+  esac
+  shift
+done
+
+if [ ! -f "$new_tarball" ]; then
+  echo "debian/uupdate: tarball package name is missing" >&2
+  exit 1
+fi
+
+tmp_dir="debian.uupdate.tmp"
+rm -rf "$tmp_dir"
+mkdir "$tmp_dir"
+
+tar -C "$tmp_dir" --auto-compress -xf "$new_tarball"
+tarball_dir="`ls $tmp_dir`"
+esptool_py="$tmp_dir/$tarball_dir/esptool.py"
+
+if [ ! -f "$esptool_py" ]; then
+  echo "debian/uupdate: esptool.py is missing" >&2
+  exit 1
+fi
+
+cp "$esptool_py" "$esptool_py-temp"
+sed -e '/# Binary stub code/,/def _main():/{//!d;}' \
+    -e 's/# Binary stub code .*/# Binary stub code purged due to DFSG\n/' \
+    "$esptool_py-temp" > "$esptool_py"
+rm -f "$esptool_py-temp"
+
+tar -C "$tmp_dir" --auto-compress -cf "$new_tarball" "$tarball_dir"
+rm -rf "$tmp_dir"
+
+current_version="`dpkg-parsechangelog --show-field version 2>/dev/null`"
+if [ -n "$current_version" ]; then
+  current_version="${current_version##*:}"
+  current_version="${current_version%-*}"
+fi
+if dpkg --compare-versions "$new_version" gt-nl "$current_version" ; then 
+  uupdate --no-symlink --upstream-version $new_version "$new_tarball"
+fi

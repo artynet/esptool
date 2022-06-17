@@ -1,0 +1,88 @@
+esptool (3.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Milan Kupcevic <milan@debian.org>  Fri, 17 Jun 2022 10:47:35 +0000
+
+esptool (2.8+dfsg-1) sid; urgency=medium
+
+  * new upstream release
+  * update debian/copyright
+  * update standards version to 4.5.0
+
+ -- Milan Kupcevic <milan@debian.org>  Sat, 08 Feb 2020 11:05:01 -0500
+
+esptool (2.6+dfsg-1) sid; urgency=medium
+
+  * new upstream release (closes: #922787)
+
+ -- Milan Kupcevic <milan@debian.org>  Mon, 11 Mar 2019 13:10:15 -0400
+
+esptool (2.5.1+dfsg-3) sid; urgency=medium
+
+  * update standards version to 4.3.0
+  * add udev rules
+
+ -- Milan Kupcevic <milan@debian.org>  Sun, 23 Dec 2018 23:51:11 -0500
+
+esptool (2.5.1+dfsg-2) sid; urgency=medium
+
+  * update man page copyright notice
+
+ -- Milan Kupcevic <milan@debian.org>  Fri, 21 Dec 2018 08:20:07 -0500
+
+esptool (2.5.1+dfsg-1) sid; urgency=medium
+
+  [ Milan Kupcevic ]
+  * new upstream release
+  * update standards version to 4.2.1
+
+  [ Ondřej Nový ]
+  * d/copyright: Use https protocol in Format field
+  * d/control: Remove trailing whitespaces
+
+ -- Milan Kupcevic <milan@debian.org>  Thu, 20 Dec 2018 21:16:47 -0500
+
+esptool (2.5.0+dfsg-1) sid; urgency=low
+
+  * New upstream release. (Closes: #906062)
+    - update debian/copyright
+  * Use discount instead of markdown.
+  * Move package maintenance repository to salsa.
+  * Update standards version to 4.2.0. No changes.
+  * Update man page examples.
+
+ -- Milan Kupcevic <milan@debian.org>  Sun, 26 Aug 2018 23:08:04 -0400
+
+esptool (2.1+dfsg1-2) sid; urgency=medium
+
+  * Add package maintenance Vcs-* fields
+  * Switch to python3
+  * Add usage examples to the man pages
+
+ -- Milan Kupcevic <milan@debian.org>  Sun, 05 Nov 2017 18:10:33 -0500
+
+esptool (2.1+dfsg1-1) sid; urgency=medium
+
+  * New upstream release
+    - python based full support for ESP32 and ESP8266 chips
+  * Disable flasher stub option due to DFSG removed binary blob
+
+ -- Milan Kupcevic <milan@debian.org>  Tue, 24 Oct 2017 01:12:50 -0400
+
+esptool (0.4.12-1) sid; urgency=medium
+
+  * New upstream release.
+    - Remove ESP32 support
+  * Set package priority to optional.
+  * Update standards version to 4.1.1. No changes.
+  * Bump debhelper compatibility up to 10.
+  * Also build on GNU/Hurd and GNU/kFreeBSD
+
+ -- Milan Kupcevic <milan@debian.org>  Tue, 17 Oct 2017 22:29:14 -0400
+
+esptool (0.4.6-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #811905)
+
+ -- Milan Kupcevic <milan@debian.org>  Sun, 14 Feb 2016 19:55:50 -0500

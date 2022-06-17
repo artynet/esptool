@@ -1,0 +1,2 @@
+version=3
+opts="compression=xz,repack,repacksuffix=+dfsg,dversionmangle=s:.dfsg[0-9]*$::" https://github.com/espressif/esptool/releases /espressif/esptool/archive/v?(.+)\.(?:tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz))) debian debian/uupdate

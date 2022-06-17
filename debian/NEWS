@@ -1,0 +1,6 @@
+esptool (2.1+dfsg1-1) sid; urgency=medium
+
+  Switching to python based esptool supporting ESP8266 and ESP32 chips.
+  Command line options have changed, see esptool man page for details. 
+
+ -- Milan Kupcevic <milan@debian.org>  Sun, 22 Oct 2017 21:15:04 -0400
