@@ -1,0 +1,25 @@
+Source: esptool
+Section: electronics
+Priority: optional
+Maintainer: Milan Kupcevic <milan@debian.org>
+Build-Depends:
+ debhelper (>= 10),
+ python3,
+ python3-serial,
+ python3-pyaes,
+ python3-ecdsa,
+ discount,
+ help2man
+Standards-Version: 4.5.0
+Vcs-Git: https://salsa.debian.org/debian/esptool.git
+Vcs-Browser: https://salsa.debian.org/debian/esptool
+Homepage: https://github.com/espressif/esptool
+
+Package: esptool
+Architecture: all
+Multi-Arch: foreign
+Depends: python3, python3-serial, python3-pyaes, python3-ecdsa, python3-bitstring, python3-reedsolo, ${misc:Depends}
+Description: create and flash firmware files to ESP8266 and ESP32 chips
+ Communicate with the ROM bootloader in Espressif ESP8266 and ESP32 chips to
+ fash firmware files, create firmware images or read OTP ROM or flash memory
+ content such is manufacturer or device IDs.
